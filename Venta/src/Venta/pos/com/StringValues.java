@@ -12,19 +12,28 @@ public class StringValues {
 	protected String getItemSuccess = "//text()[.='Successfully created item.']/ancestor::div[1]";
 	protected String getItemError = "//div[text()='Please review fields again.']";
 	
-// Discount notif message 
+// Create SNPWD Discount
 	
 	protected String getDescountSuccess = "/html[1]/body[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]";
 	protected String getDescountError = "//div[text()='Please review fields again.']";	
 	protected String sRPWDDiscountCreateBtn = "//div[text()='ADD NEW SENIOR/PWD DISCOUNT']";
-	protected String discountAndCouponMngtBtn = "//span[contains(text(),'Discounts & Coupons')]";
+	protected String discountBtn = "//text()[contains(.,'Discounts')]/ancestor::div[1]";
 	protected String savePWDSrDiscountBtn = "//div[text()='SAVE']";
 	protected String sRPWDEditBtn = "/html[1]/body[1]/div[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/table[1]/tbody[1]/tr[1]/td[4]/button[1]";
+
+// Create Other Discount
+	protected String newOtherDiscBtn = "/html[1]/body[1]/div[1]/div[1]/div[1]/main[1]/div[2]/div[1]/div[1]/div[1]/div[2]/button[1]";
+	protected String otherDiscNameField = "//input[@type='text'][@class='q-field__native']";	
+	protected String otherDiscField = "//input[@type='number'][@class='q-field__native']";
+	protected String saveOtherDiscDetailsBtn = "//text()[.='SAVE']/ancestor::button[1]";
+	protected String otherDiscTab = "(.//*[normalize-space(text()) and normalize-space(.)='Other Discounts'])[1]/following::div[1]";
 	
+
+// Item Modules
 	protected String itemsMngtHomeBtn = "//span[contains(text(),'Items')]";
 	protected String emailField = "//input[@placeholder='Email']";
 	protected String passwordField = "//input[@placeholder='Password']";
-	protected String btnLogin = "//div[contains(text(),'LOGIN')]";
+	protected String btnLogin = "//text()[contains(.,'LOGIN')]/ancestor::button[1]";
 	protected String createItemBtn = "/html[1]/body[1]/div[1]/div[1]/div[1]/main[1]/div[1]/div[2]/button[1]/div[2]";
 	protected String itemCodeField = "/html[1]/body[1]/div[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]";
 	protected String itemDescField = "/html[1]/body[1]/div[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]";
