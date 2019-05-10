@@ -16,9 +16,9 @@ public class StringValues {
 	
 	protected String getDescountSuccess = "/html[1]/body[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]";
 	protected String getDescountError = "//div[text()='Please review fields again.']";	
-	protected String sRPWDDiscountCreateBtn = "//div[text()='ADD NEW SENIOR/PWD DISCOUNT']";
+	protected String sRPWDDiscountCreateBtn = "/html[1]/body[1]/div[1]/div[1]/div[1]/main[1]/div[2]/div[1]/div[1]/div[1]/div[2]/button[1]";
 	protected String discountBtn = "//text()[contains(.,'Discounts')]/ancestor::div[1]";
-	protected String savePWDSrDiscountBtn = "//div[text()='SAVE']";
+	protected String savePWDSrDiscountBtn = "//text()[.='SAVE']/ancestor::button[1]";
 	protected String sRPWDEditBtn = "/html[1]/body[1]/div[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/table[1]/tbody[1]/tr[1]/td[4]/button[1]";
 
 // Create Other Discount
@@ -42,8 +42,8 @@ public class StringValues {
 	protected String vatableSwitch= "//div[@class='q-toggle-handle row flex-center']";
 	protected String discountField = "/html[1]/body[1]/div[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[6]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]";
 	protected String saveItemBtn ="//text()[.='SAVE']/ancestor::button[1]";
-	protected String discountNameField = "//input[@type='text'][@class='col q-input-target q-no-input-spinner']";
-	protected String discountPercentField = "//input[@type='number'][@class='col q-input-target q-no-input-spinner']";
+	protected String discountNameField = "//input[@type='text'][@class='q-field__native']";
+	protected String discountPercentField = "//input[@type='number'][@class='q-field__native']";
 	
 // Users Modules
 	protected String userTabBtn = "/html[1]/body[1]/div[1]/div[1]/div[1]/main[1]/div[2]/div[2]/div[1]/div[1]";

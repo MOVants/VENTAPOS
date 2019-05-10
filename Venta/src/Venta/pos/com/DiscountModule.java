@@ -54,8 +54,7 @@ public class DiscountModule extends StringValues {
 		setPWDSeniorDiscDetails();
 		saveSNPWDDiscountDetails();
 		Thread.sleep(1000);
-		String str = driver.findElement(By.xpath(getDescountSuccess)).getText();
-		if (str.contains("Successfully")) {
+		if (driver.getPageSource().contains("Successfully")) {
 			System.out.println("Create SR/PWD discount test = Passed!");
 		}else {
 			System.out.println("Create SR/PWD discount test = Failed!");
@@ -105,8 +104,7 @@ public class DiscountModule extends StringValues {
 		driver.findElement(By.xpath(discountPercentField)).sendKeys(RandomStringUtils.randomNumeric(2));
 		saveSNPWDDiscountDetails();
 		Thread.sleep(1000);
-		String str = driver.findElement(By.xpath(getDescountError)).getText();
-		if (str.contains("Please review fields again.")) {
+		if (driver.getPageSource().contains("Please review fields again.")) {
 			System.out.println("Empty SR/PWD Discount Percent Field Test = Passed!");
 		} else {
 			System.out.println("Empty SR/PWD Discount Percent Field Test = Failed!");
