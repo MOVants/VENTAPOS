@@ -1,12 +1,20 @@
 package Venta.pos.com;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 public class StringValues {
+	
+	protected String randomAlphaNumChar = RandomStringUtils.randomAlphabetic(10);
+	protected String randomAlphaChar = RandomStringUtils.randomAlphabetic(6);
+	protected String randomNumChar = RandomStringUtils.randomAlphabetic(11);
 
 //login
-	protected String authUser = "marvin.posuser@pos.com";
-	protected String authUsrPassword = "1";
-	protected String authAdm = "admin@satellite.com.ph";
-	protected String authAdmPassword = "admin";
+	protected String authRoleUser = "marvin.posuser@pos.com";
+	protected String authRoleUserPassword = "1";
+	protected String authRoleAdm = "marvin.posadmin@pos.com";
+	protected String authRoleAdmPassword = "1";
+	protected String authSuperAdm = "admin@satellite.com.ph";
+	protected String authSuperAdmPassword = "admin";
 
 // Item notif message
 	protected String getItemSuccess = "//text()[.='Successfully created item.']/ancestor::div[1]";

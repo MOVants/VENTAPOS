@@ -7,7 +7,9 @@ import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class updasad extends StringValues {
 	static WebDriver driver;
@@ -38,8 +40,8 @@ public class updasad extends StringValues {
 	@Test
 	public void LoginTestd() throws Exception {
 		driver.get("http://172.16.0.12:8501/#/");
-		driver.findElement(By.xpath(emailField)).sendKeys(authAdm);
-		driver.findElement(By.xpath(passwordField)).sendKeys(authAdmPassword);
+		driver.findElement(By.xpath(emailField)).sendKeys("admin@satellite.com.ph");
+		driver.findElement(By.xpath(passwordField)).sendKeys("admin");
 		driver.findElement(By.xpath(btnLogin)).click();
 		driver.findElement(By.xpath("//i[text()='phonelink_setup']")).click();
 		Thread.sleep(1000);
@@ -53,6 +55,16 @@ public class updasad extends StringValues {
 		driver.navigate().refresh();
 		Thread.sleep(5000);
 	}
+	
+	@Test
+	  public void sasd() throws Exception {
+	    driver.get("http://172.16.0.12:8501/");
+	    driver.findElement(By.cssSelector(".q-btn__content > div")).click();
+	    driver.findElement(By.cssSelector(".text-primary .q-field__native")).sendKeys("100001");
+	    driver.findElement(By.cssSelector(".q-btn--flat:nth-child(2) > .q-btn__content")).click();
+	    
+	    Thread.sleep(5000);
+	  }
 
 
 

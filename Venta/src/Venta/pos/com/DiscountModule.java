@@ -39,7 +39,7 @@ public class DiscountModule extends StringValues {
 	
 
 	@Test
-	public void LoginTest() throws Exception {
+	public void toLogin() throws Exception {
 		toAdmLogin();
 		System.out.println("Login test = Passed!");
 	}
