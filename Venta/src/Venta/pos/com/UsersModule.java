@@ -1,7 +1,10 @@
 package Venta.pos.com;
 
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -19,20 +22,29 @@ public class UsersModule extends StringValues {
 	public void browserConfig () {
 
 		if (browser.contains("Firefox")) {
-			System.setProperty("webdriver.gecko.driver","/home/marvin/git/VENTAPOS/Venta/libs/chromeDriver/geckodriver"); 
+			System.setProperty("webdriver.gecko.driver","/home/christopher/eclipse-workspace/Selinium/LIBRARY/chromeDriver/chromedriver"); 
 			driver = new FirefoxDriver();
 		}else if (browser.contains("Chrome")) {
-			System.setProperty("webdriver.chrome.driver", "/home/marvin/git/VENTAPOS/Venta/libs/chromeDriver/chromedriver");
+			System.setProperty("webdriver.chrome.driver","/home/christopher/eclipse-workspace/Selinium/LIBRARY/chromeDriver/chromedriver");
 			driver = new ChromeDriver();
 		}
 	}
-	
+	@Before
+	public void setUp() throws Exception {
+		setBrowser();
+		browserConfig();
+		driver.get("http://172.16.0.12:8589");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
 	
 
 	@Test
 	public void createUserTest() throws Exception {
 		toAdmLogin();
 		usersTab();
+		Thread.sleep(1000);
+		addNewUser();
 		setCashierDetails();
 		toSaveCashier();
 		Thread.sleep(1000);
@@ -50,9 +62,12 @@ public class UsersModule extends StringValues {
 	public void emptyEmailTest() throws Exception {
 		toAdmLogin();
 		usersTab();
+		Thread.sleep(1000);
+		addNewUser();
 		setCashierDetails();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath(emailField)).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		Thread.sleep(1000);
 		driver.findElement(By.xpath(emailField)).sendKeys(Keys.BACK_SPACE);
 		toSaveCashier();
 		Thread.sleep(1000);
@@ -70,6 +85,8 @@ public class UsersModule extends StringValues {
 	public void emptyNameTest() throws Exception {
 		toAdmLogin();
 		usersTab();
+		Thread.sleep(1000);
+		addNewUser();
 		setCashierDetails();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath(firstNameField)).sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -90,6 +107,8 @@ public class UsersModule extends StringValues {
 	public void emptyLastNameTest() throws Exception {
 		toAdmLogin();
 		usersTab();
+		Thread.sleep(1000);
+		addNewUser();
 		setCashierDetails();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath(lastNameField)).sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -110,6 +129,8 @@ public class UsersModule extends StringValues {
 	public void emptyContactNumberTest() throws Exception {
 		toAdmLogin();
 		usersTab();
+		Thread.sleep(1000);
+		addNewUser();
 		setCashierDetails();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath(contactNumField)).sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -130,6 +151,8 @@ public class UsersModule extends StringValues {
 	public void emptyPasswordTest() throws Exception {
 		toAdmLogin();
 		usersTab();
+		Thread.sleep(1000);
+		addNewUser();
 		setCashierDetails();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath(passField)).sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -150,6 +173,7 @@ public class UsersModule extends StringValues {
 	public void emptyRePasswordTest() throws Exception {
 		toAdmLogin();
 		usersTab();
+		Thread.sleep(1000);
 		addNewUser();
 		setCashierDetails();
 		Thread.sleep(1000);
@@ -177,7 +201,7 @@ public class UsersModule extends StringValues {
 	}
 	private void setCashierDetails() throws InterruptedException {
 		Thread.sleep(1000);
-		driver.findElement(By.xpath(emailField)).sendKeys(RandomStringUtils.randomAlphanumeric(6)+"@"+RandomStringUtils.randomAlphanumeric(3)+".com");
+		 driver.findElement(By.xpath(emailField)).sendKeys(RandomStringUtils.randomAlphanumeric(6)+"@"+RandomStringUtils.randomAlphanumeric(3)+".com");
 		driver.findElement(By.xpath(firstNameField)).sendKeys(RandomStringUtils.randomAlphabetic(5));
 		driver.findElement(By.xpath(lastNameField)).sendKeys(RandomStringUtils.randomAlphabetic(5));
 		driver.findElement(By.cssSelector(roleDrpDwn)).click();
@@ -197,8 +221,8 @@ public class UsersModule extends StringValues {
 	}
 
 	private void toAdmLogin() {
-		driver.findElement(By.xpath(emailField)).sendKeys(authAdm);
-		driver.findElement(By.xpath(passwordField)).sendKeys(authAdmPassword);
+		driver.findElement(By.xpath(emailField)).sendKeys(authSuperAdm);
+		driver.findElement(By.xpath(passwordField)).sendKeys(authSuperAdmPassword);
 		driver.findElement(By.xpath(btnLogin)).click();
 	}
 

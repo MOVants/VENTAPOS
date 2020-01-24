@@ -18,19 +18,26 @@ public class ItemsModule extends StringValues{
 	static String browser;
 
 	public void setBrowser() {
-		browser = "Firefox";
+		browser = "Chrome";
 	}
 	public void browserConfig () {
 
 		if (browser.contains("Firefox")) {
-			System.setProperty("webdriver.gecko.driver","/home/marvin/git/VENTAPOS/Venta/libs/chromeDriver/geckodriver"); 
+			System.setProperty("webdriver.gecko.driver", "/home/christopher/eclipse-workspace/Selinium/LIBRARY/chromeDriver/chromedriver"); 
 			driver = new FirefoxDriver();
 		}else if (browser.contains("Chrome")) {
-			System.setProperty("webdriver.chrome.driver", "/home/marvin/git/VENTAPOS/Venta/libs/chromeDriver/chromedriver");
+			System.setProperty("webdriver.chrome.driver", "/home/christopher/eclipse-workspace/Selinium/LIBRARY/chromeDriver/chromedriver");
 			driver = new ChromeDriver();
 		}
 	}
-
+	@Before
+	public void setUp() throws Exception {
+		setBrowser();
+		browserConfig();
+		driver.get("http://172.16.0.12:8589");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
 	@Test
 	public void createItemTest() throws Exception {
 		toAdmLogin();
@@ -126,6 +133,7 @@ public class ItemsModule extends StringValues{
 			System.out.println("Vatable Item Switch Off Test = Failed!");
 		}
 	}
+	@Test
 	public void noDiscountApplyTest() throws Exception{
 		toAdmLogin();
 		itemsHomeBtn();
@@ -156,10 +164,13 @@ public class ItemsModule extends StringValues{
 	public void setItemDetails() {
 		driver.findElement(By.xpath(itemCodeField)).sendKeys(RandomStringUtils.randomAlphanumeric(3));
 		driver.findElement(By.xpath(itemDescField)).sendKeys(RandomStringUtils.randomAlphanumeric(10));
-		driver.findElement(By.xpath(originalPriceField)).sendKeys(RandomStringUtils.randomNumeric(3));
 		driver.findElement(By.xpath(barcodeField)).sendKeys(RandomStringUtils.randomNumeric(6));
-		driver.findElement(By.xpath(vatableSwitch)).click();
+		driver.findElement(By.xpath(originalPriceField)).sendKeys(RandomStringUtils.randomNumeric(3));
+		driver.findElement(By.xpath(discountField)).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		driver.findElement(By.xpath(discountField)).sendKeys(Keys.BACK_SPACE);
 		driver.findElement(By.xpath(discountField)).sendKeys(RandomStringUtils.randomNumeric(2));
+		driver.findElement(By.xpath(vatableSwitch)).click();
+		
 	}
 
 	private void itemsHomeBtn()throws Exception {
@@ -169,8 +180,8 @@ public class ItemsModule extends StringValues{
 
 
 	private void toAdmLogin() {
-		driver.findElement(By.xpath(emailField)).sendKeys(authAdm);
-		driver.findElement(By.xpath(passwordField)).sendKeys(authAdmPassword);
+		driver.findElement(By.xpath(emailField)).sendKeys(authSuperAdm);
+		driver.findElement(By.xpath(passwordField)).sendKeys(authSuperAdmPassword);
 		driver.findElement(By.xpath(btnLogin)).click();
 	}
 

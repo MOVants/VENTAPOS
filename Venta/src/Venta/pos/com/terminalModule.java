@@ -15,7 +15,7 @@ public class terminalModule {
 
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", "/home/marvin/git/VENTAPOS/Venta/libs/chromeDriver/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "/home/christopher/eclipse-workspace/Selinium/LIBRARY/chromeDriver/chromedriver");
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}

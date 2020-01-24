@@ -20,10 +20,10 @@ public class DiscountModule extends StringValues {
 	public void browserConfig () {
 
 		if (browser.contains("Firefox")) {
-			System.setProperty("webdriver.gecko.driver","/home/marvin/git/VENTAPOS/Venta/libs/geckoDriver/geckodriver"); 
+			System.setProperty("webdriver.gecko.driver","/home/christopher/eclipse-workspace/Selinium/LIBRARY/chromeDriver/chromedriver"); 
 			driver = new FirefoxDriver();
 		}else if (browser.contains("Chrome")) {
-			System.setProperty("webdriver.chrome.driver", "/home/marvin/git/VENTAPOS/Venta/libs/chromeDriver/chromedriver");
+			System.setProperty("webdriver.chrome.driver", "/home/christopher/eclipse-workspace/Selinium/LIBRARY/chromeDriver/chromedriver");
 			driver = new ChromeDriver();
 		}
 	}
@@ -101,7 +101,7 @@ public class DiscountModule extends StringValues {
 		setPWDSeniorDiscDetails();
 		driver.findElement(By.xpath(discountPercentField)).sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		driver.findElement(By.xpath(discountPercentField)).sendKeys(Keys.BACK_SPACE);
-		driver.findElement(By.xpath(discountPercentField)).sendKeys(RandomStringUtils.randomNumeric(2));
+		//driver.findElement(By.xpath(discountPercentField)).sendKeys(RandomStringUtils.randomNumeric(2));
 		saveSNPWDDiscountDetails();
 		Thread.sleep(1000);
 		if (driver.getPageSource().contains("Please review fields again.")) {
@@ -117,14 +117,15 @@ public class DiscountModule extends StringValues {
 		todiscounts();
 		Thread.sleep(1000);
 		selectPWDSeniorDisctoModify();
-		String discountName = driver.findElement(By.xpath(discountNameField)).getText();
+		//String discountName = driver.findElement(By.xpath(discountNameField)).getText();
 		Thread.sleep(1000);
 		modifySrPWDDiscountDetails();
 
 		saveSNPWDDiscountDetails();
 		Thread.sleep(1000);
-		String str = driver.findElement(By.xpath(getDescountSuccess)).getText();
-		if (str.contains(discountName)) {
+		
+		if (driver.getPageSource().contains("Successfully")) {
+		
 			System.out.println("Modify SR/PWD Discount Test = Passed!");
 		} else {
 			System.out.println("Modify SR/PWD Discount Test = Failed!");
@@ -140,11 +141,10 @@ public class DiscountModule extends StringValues {
 		driver.findElement(By.xpath(discountNameField)).sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		driver.findElement(By.xpath(discountNameField)).sendKeys(Keys.BACK_SPACE);
 		driver.findElement(By.xpath(discountNameField)).sendKeys(RandomStringUtils.randomNumeric(8));
-		String discountName = driver.findElement(By.xpath(discountNameField)).getText();
+		//String discountName = driver.findElement(By.xpath(discountNameField)).getText();
 		saveSNPWDDiscountDetails();
 		Thread.sleep(1000);
-		String str = driver.findElement(By.xpath(getDescountSuccess)).getText();
-		if (str.contains(discountName)) {
+		if (driver.getPageSource().contains("Successfully")) {
 			System.out.println("Modify SR/PWD Discount Name Field  Test = Passed!");
 		} else {
 			System.out.println("Modify SR/PWD Discount Name Field  Test = Failed!");
@@ -159,12 +159,12 @@ public class DiscountModule extends StringValues {
 		selectPWDSeniorDisctoModify();
 		driver.findElement(By.xpath(discountPercentField)).sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		driver.findElement(By.xpath(discountPercentField)).sendKeys(Keys.BACK_SPACE);
-		driver.findElement(By.xpath(discountPercentField)).sendKeys(RandomStringUtils.randomNumeric(8));
-		String discountName = driver.findElement(By.xpath(discountNameField)).getText();
+		driver.findElement(By.xpath(discountPercentField)).sendKeys(RandomStringUtils.randomNumeric(2));
+		//String discountName = driver.findElement(By.xpath(discountNameField)).getText();
 		saveSNPWDDiscountDetails();
 		Thread.sleep(1000);
-		String str = driver.findElement(By.xpath(getDescountSuccess)).getText();
-		if (str.contains(discountName)) {
+		
+		if (driver.getPageSource().contains("Successfully")) {
 			System.out.println("Modify SR/PWD Discount Percent Field  Test = Passed!");
 		} else {
 			System.out.println("Modify SR/PWD Discount Percent Field  Test = Failed!");
@@ -190,6 +190,23 @@ public class DiscountModule extends StringValues {
 			System.out.println("Create Other Discount - QA Failed");
 		}
 		
+		
+	}
+	@Test
+	public void createItemTest() throws Exception {
+		toAdmLogin();
+		itemsHomeBtn();
+		createNewItemBtn();
+		Thread.sleep(1000);
+		setItemDetails();
+		toSaveItem();
+		Thread.sleep(1000);
+		//String str = driver.findElement(By.xpath(getItemSuccess)).getText();
+		if (driver.getPageSource().contains("Successfully")) {
+			System.out.println("Create Item Test = Passed!");
+		} else {
+			System.out.println("Create Item Test = Failed!");
+		}
 	}
 
 	private void newOtherDiscountBtn() {
@@ -241,10 +258,29 @@ public class DiscountModule extends StringValues {
 	}
 
 	private void toAdmLogin() {
-		driver.findElement(By.xpath(emailField)).sendKeys(authAdm);
-		driver.findElement(By.xpath(passwordField)).sendKeys(authAdmPassword);
+		driver.findElement(By.xpath(emailField)).sendKeys(authSuperAdm);
+		driver.findElement(By.xpath(passwordField)).sendKeys(authSuperAdmPassword);
 		driver.findElement(By.xpath(btnLogin)).click();
 	}
+	private void itemsHomeBtn()throws Exception {
+		driver.findElement(By.xpath(itemsMngtHomeBtn)).click();
+		Thread.sleep(1000);
+	}
+	private void createNewItemBtn() {
+		driver.findElement(By.xpath(createItemBtn)).click();
+	}
+	public void setItemDetails() {
+		driver.findElement(By.xpath(itemCodeField)).sendKeys(RandomStringUtils.randomAlphanumeric(3));
+		driver.findElement(By.xpath(itemDescField)).sendKeys(RandomStringUtils.randomAlphanumeric(10));
+		driver.findElement(By.xpath(originalPriceField)).sendKeys(RandomStringUtils.randomNumeric(3));
+		driver.findElement(By.xpath(barcodeField)).sendKeys(RandomStringUtils.randomNumeric(6));
+		driver.findElement(By.xpath(vatableSwitch)).click();
+		driver.findElement(By.xpath(discountField)).sendKeys(RandomStringUtils.randomNumeric(2));
+	}
+	private void toSaveItem() {
+		driver.findElement(By.xpath(saveItemBtn)).click();
+	}
+
 
 	@After
 	public void tearDown() throws Exception {
