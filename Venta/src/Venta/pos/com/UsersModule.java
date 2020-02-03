@@ -22,10 +22,10 @@ public class UsersModule extends StringValues {
 	public void browserConfig () {
 
 		if (browser.contains("Firefox")) {
-			System.setProperty("webdriver.gecko.driver","/home/christopher/eclipse-workspace/Selinium/LIBRARY/chromeDriver/chromedriver"); 
+			System.setProperty("webdriver.gecko.driver","/home/christopher/git/VENTAPOS/Venta/libs/chromeDriver/chromedriver"); 
 			driver = new FirefoxDriver();
 		}else if (browser.contains("Chrome")) {
-			System.setProperty("webdriver.chrome.driver","/home/christopher/eclipse-workspace/Selinium/LIBRARY/chromeDriver/chromedriver");
+			System.setProperty("webdriver.chrome.driver","/home/christopher/git/VENTAPOS/Venta/libs/chromeDriver/chromedriver");
 			driver = new ChromeDriver();
 		}
 	}
